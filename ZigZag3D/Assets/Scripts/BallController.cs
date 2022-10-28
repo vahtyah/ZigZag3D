@@ -35,7 +35,6 @@ public class BallController : MonoBehaviour
             gameOver = true;
             rb.velocity = new Vector3(0, -25f, 0);
             Camera.main.GetComponent<CameraFollow>().gameOver = true;
-
         }
         if (Input.GetMouseButtonDown(0) && !gameOver)
             SwitchDirection();
@@ -47,7 +46,6 @@ public class BallController : MonoBehaviour
         else if (rb.velocity.x > 0)
             rb.velocity = new Vector3(0, 0, speed);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Diamond")

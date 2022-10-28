@@ -41,7 +41,7 @@ public class PlatformSpawner : MonoBehaviour
 
         int rand = Random.Range(0, 4);
         if (rand < 1)
-            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), Quaternion.identity);
+            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), diamond.transform.rotation);
 
     }
     void SpawnZ()
@@ -52,6 +52,6 @@ public class PlatformSpawner : MonoBehaviour
         Instantiate(platform, pos, Quaternion.identity);
         int rand = Random.Range(0, 4);
         if (rand < 1)
-            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), Quaternion.identity);
+            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), diamond.transform.rotation);
     }
 }
