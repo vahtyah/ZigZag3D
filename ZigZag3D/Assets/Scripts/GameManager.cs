@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static GameManager instance;
+    public bool gameOver;
+
+    private void Awake()
     {
-        
+        if(!instance) instance = this;
+    }
+    private void Start()
+    {
+        gameOver = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void StartGame()
     {
-        
+        UiManager.instance.GameStart();
+    }
+
+    public void GameOver()
+    {
+        UiManager.instance.GameOver();
     }
 }
