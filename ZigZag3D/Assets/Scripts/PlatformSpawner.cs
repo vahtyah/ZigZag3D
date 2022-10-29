@@ -9,19 +9,26 @@ public class PlatformSpawner : MonoBehaviour
     public GameObject parent;
     Vector3 lastPos;
     float size;
+    private void Awake()
+    {
+        
+    }
 
     private void Start()
     {
         lastPos = transform.position;
         size = platform.transform.localScale.x;
         for (int i = 0; i < 25; i++)
-            Invoke("SpawnPlatforms", .5f);
-        InvokeRepeating("SpawnPlatforms", 2f, .2f);
+            SpawnPlatforms();
     }
     private void Update()
     {
         if (GameManager.instance.gameOver)
             CancelInvoke("SpawnPlatforms");
+    }
+    public void StartSpawnPlatform()
+    {
+        InvokeRepeating("SpawnPlatforms", 0f, .2f);
     }
     void SpawnPlatforms()
     {
