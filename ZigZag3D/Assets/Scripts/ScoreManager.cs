@@ -16,12 +16,32 @@ public class ScoreManager : MonoBehaviour
     {
         score = 0;
         PlayerPrefs.SetInt("score", score);
+        bestScore = PlayerPrefs.GetInt("bestScore");
     }
 
-    public void IncrementScore()
+    public void IncrementScoreTrigerDiamond(int value = 2)
+    {
+        score += value;
+    }
+
+    void IncrementScore()
     {
         score++;
     }
 
+    public void StartIncrementScore()
+    {
+        InvokeRepeating("IncrementScore", 1f, .5f);
+    }
 
+    public void StopIncrementScore()
+    {
+        CancelInvoke("IncrementScore");
+        PlayerPrefs.SetInt("score", score);
+        if (score > bestScore)
+        {
+            bestScore = score;
+            PlayerPrefs.SetInt("bestScore", bestScore);
+        }
+    }
 }

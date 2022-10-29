@@ -7,15 +7,13 @@ public class CameraFollow : MonoBehaviour
     public GameObject ball;
     Vector3 offset;
     [SerializeField] float lerpRate;
-    public bool gameOver;
     private void Start()
     {
         offset = ball.transform.position - transform.position;
-        gameOver = false;
     }
     private void Update()
     {
-        if (!gameOver) Follow();
+        if (!GameManager.instance.gameOver) Follow();
     }
     void Follow()
     {

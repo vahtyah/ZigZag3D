@@ -6,23 +6,21 @@ public class PlatformSpawner : MonoBehaviour
 {
     public GameObject platform;
     public GameObject diamond;
+    public GameObject parent;
     Vector3 lastPos;
     float size;
 
-    public bool gameOver;
-
     private void Start()
     {
-        gameOver = false;
-        lastPos = platform.transform.position;
+        lastPos = transform.position;
         size = platform.transform.localScale.x;
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 25; i++)
             Invoke("SpawnPlatforms", .5f);
         InvokeRepeating("SpawnPlatforms", 2f, .2f);
     }
     private void Update()
     {
-        if (gameOver)
+        if (GameManager.instance.gameOver)
             CancelInvoke("SpawnPlatforms");
     }
     void SpawnPlatforms()
@@ -37,21 +35,26 @@ public class PlatformSpawner : MonoBehaviour
         Vector3 pos = lastPos;
         pos.x += size;
         lastPos = pos;
-        Instantiate(platform, pos, Quaternion.identity);
+        GameObject parentGO = Instantiate(parent,pos,Quaternion.identity);
+        Instantiate(platform, pos, Quaternion.identity,parentGO.transform);
 
         int rand = Random.Range(0, 4);
         if (rand < 1)
-            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), diamond.transform.rotation);
-
+        {
+            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), diamond.transform.rotation, parentGO.transform);
+        }
     }
     void SpawnZ()
     {
         Vector3 pos = lastPos;
         pos.z += size;
         lastPos = pos;
-        Instantiate(platform, pos, Quaternion.identity);
+        GameObject parentGO = Instantiate(parent, pos, Quaternion.identity);
+        Instantiate(platform, pos, Quaternion.identity, parentGO.transform);
         int rand = Random.Range(0, 4);
         if (rand < 1)
-            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), diamond.transform.rotation);
+        {
+            Instantiate(diamond, new Vector3(pos.x, pos.y + 1f, pos.z), diamond.transform.rotation, parentGO.transform);
+        }
     }
 }

@@ -20,6 +20,11 @@ public class UiManager : MonoBehaviour
         if(!instance) instance = this;
     }
 
+    private void Start()
+    {
+        bestScoreHead.text = "Best Score: " + PlayerPrefs.GetInt("bestScore");
+    }
+
     public void GameStart()
     {
         tapText.SetActive(false);
@@ -29,6 +34,8 @@ public class UiManager : MonoBehaviour
     {
         gameOverPanel.SetActive(true);
         gameOverPanel.GetComponent<Animator>().Play("GameOverPanel");
+        score.text = ScoreManager.instance.score.ToString();
+        bestScoreGO.text = ScoreManager.instance.bestScore.ToString();
     }
     public void Repeat()
     {

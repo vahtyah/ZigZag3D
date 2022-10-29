@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
     public bool gameOver;
+    public bool startGame;
 
     private void Awake()
     {
@@ -14,15 +15,20 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameOver = false;
+        startGame = false;
     }
 
     public void StartGame()
     {
+        startGame = true;
         UiManager.instance.GameStart();
+        ScoreManager.instance.StartIncrementScore();
     }
 
     public void GameOver()
     {
+        gameOver = true;
         UiManager.instance.GameOver();
+        ScoreManager.instance.StopIncrementScore();
     }
 }
